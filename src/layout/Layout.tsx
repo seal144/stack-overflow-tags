@@ -7,7 +7,12 @@ const Layout = ({ children }: PropsWithChildren) => {
     <Box sx={{ backgroundColor: blueGrey[900], color: teal[100] }}>
       <Container
         fixed
-        sx={({ spacing }) => ({ minHeight: '100vh', paddingTop: spacing(4), paddingBottom: spacing(4) })}
+        maxWidth="md"
+        sx={({ spacing }) => ({
+          minHeight: '100vh',
+          paddingTop: spacing(4),
+          paddingBottom: spacing(4),
+        })}
       >
         <Typography
           variant="h3"

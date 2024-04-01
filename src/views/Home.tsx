@@ -1,19 +1,23 @@
-import { Box, Typography } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
+import { Box } from '@mui/material';
 import useTagsQuery from '../api/useTagsQuery';
-import useTagsStore from '../store/useTagsStore';
+import { TagTable } from '../components';
+import { Params } from '../types';
 
 const Home = () => {
-  const { isPending } = useTagsQuery();
-  const { tags } = useTagsStore();
+  const [searchParams] = useSearchParams();
+  const { isPending, error } = useTagsQuery(
+    searchParams.get(Params.Page),
+    searchParams.get(Params.PageSize),
+    searchParams.get(Params.Sort),
+    searchParams.get(Params.Order)
+  );
 
   return (
     <Box>
-      {isPending && <Typography>Loading...</Typography>}
-      {tags.map((tag) => (
-        <div key={tag.name}>
-          {tag.name} - {tag.count}
-        </div>
-      ))}
+      {isPending && <p>Loading...</p>}
+      {error && <p>{error.message}</p>}
+      <TagTable />
     </Box>
   );
 };
