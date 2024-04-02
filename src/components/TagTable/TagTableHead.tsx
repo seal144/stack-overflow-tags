@@ -54,6 +54,7 @@ const TagTableHead = () => {
         prevParams.set(Params.Sort, cellId);
         prevParams.set(Params.Order, cellId === SortParams.Popular ? OrderParams.Desc : OrderParams.Asc);
       }
+      prevParams.set(Params.Page, '1');
       return prevParams;
     });
   };

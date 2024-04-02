@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { ThemeProvider as ThemeProviderMUI, createTheme } from '@mui/material/styles';
+import { ThemeProvider as ThemeProviderMui, createTheme } from '@mui/material/styles';
 
 const darkTheme = createTheme({
   palette: {
@@ -8,7 +8,7 @@ const darkTheme = createTheme({
 });
 
 const ThemeProvider = ({ children }: PropsWithChildren) => {
-  return <ThemeProviderMUI theme={darkTheme}>{children}</ThemeProviderMUI>;
+  return <ThemeProviderMui theme={darkTheme}>{children}</ThemeProviderMui>;
 };
 
 export default ThemeProvider;

@@ -24,7 +24,7 @@ const useTagsQuery = (page?: string | null, pageSize?: string | null, sort?: str
   });
 
   useEffect(() => {
-    if (data) {
+    if (data?.items) {
       //TODO delete later
       console.log(new Date());
       console.log(data);

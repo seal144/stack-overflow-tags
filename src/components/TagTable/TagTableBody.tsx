@@ -8,7 +8,7 @@ const TagTableBody = () => {
     <TableBody>
       {tags.map((tag) => (
         <TableRow key={tag.name}>
-          <TableCell sx={{ padding: '.5rem' }}>
+          <TableCell sx={({ spacing }) => ({ padding: spacing(1) })}>
             <Typography
               sx={({ breakpoints }) => ({
                 fontSize: '1.5rem',
@@ -20,7 +20,7 @@ const TagTableBody = () => {
               {tag.name}
             </Typography>
           </TableCell>
-          <TableCell align="right" sx={{ padding: '.5rem' }}>
+          <TableCell align="right" sx={({ spacing }) => ({ padding: spacing(1) })}>
             <Typography
               sx={({ breakpoints }) => ({
                 fontSize: '1.5rem',

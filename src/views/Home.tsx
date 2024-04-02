@@ -1,7 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import useTagsQuery from '../api/useTagsQuery';
-import { TagTable } from '../components';
+import TagTable from '../components/TagTable';
+import useTagsStore from '../store/useTagsStore';
 import { Params } from '../types';
 
 const Home = () => {
@@ -12,12 +13,15 @@ const Home = () => {
     searchParams.get(Params.Sort),
     searchParams.get(Params.Order)
   );
+  const { tags } = useTagsStore();
 
   return (
     <Box>
+      {/* TODO: error state */}
       {isPending && <p>Loading...</p>}
+      {/* TODO: error state */}
       {error && <p>{error.message}</p>}
-      <TagTable />
+      {!isPending && !error && !!tags.length && <TagTable />}
     </Box>
   );
 };
