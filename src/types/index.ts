@@ -11,7 +11,6 @@ export interface TagsResponseData {
 
 export interface TagsStore {
   tags: TagItem[];
-  page: number;
   totalPages: number;
   updateStore: (fetchedData: TagsResponseData, page: number, pageSize: number) => void;
 }
