@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import { SxProps } from '@mui/system';
@@ -16,12 +17,13 @@ interface InputDebouncedProps {
   numeric?: boolean;
   min?: number;
   max?: number;
-  sideEffect?: (pageSize: string) => void;
+  sideEffect?: (pageSize: string, searchParams: URLSearchParams) => void;
   sx?: SxProps;
 }
 
 const InputDebounced = ({ label, value, setValue, numeric = false, min, max, sideEffect, sx }: InputDebouncedProps) => {
   const [validationError, setValidationError] = useState(' ');
+  const [searchParams] = useSearchParams();
 
   const clearError = () => {
     setValidationError(' ');
@@ -31,10 +33,10 @@ const InputDebounced = ({ label, value, setValue, numeric = false, min, max, sid
   const debouncedSideEffect = useCallback(
     debounce((changedValue: string, isError: boolean) => {
       if (sideEffect && !isError) {
-        sideEffect(changedValue);
+        sideEffect(changedValue, searchParams);
       }
     }, 800),
-    []
+    [searchParams]
   );
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -20,14 +20,14 @@ const TagTable = ({ loading }: { loading: boolean }) => {
     searchParams.get(Params.Page) ? Number(searchParams.get(Params.Page)) : Number(DefaultParams.Page)
   );
 
-  const SideEffectPageSizeChange = (pageSize: string) => {
-    setSearchParams((prevParams) => {
+  const SideEffectPageSizeChange = (pageSize: string, searchParams: URLSearchParams) => {
+    setSearchParams(() => {
       if (pageSize === '') {
-        prevParams.set(Params.PageSize, DefaultParams.PageSize);
+        searchParams.set(Params.PageSize, DefaultParams.PageSize);
       } else {
-        prevParams.set(Params.PageSize, String(pageSize));
+        searchParams.set(Params.PageSize, String(pageSize));
       }
-      return prevParams;
+      return searchParams;
     });
   };
 
@@ -40,7 +40,7 @@ const TagTable = ({ loading }: { loading: boolean }) => {
       });
       window.scrollTo(0, 0);
     }, 800),
-    []
+    [setSearchParams]
   );
 
   const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
@@ -56,7 +56,7 @@ const TagTable = ({ loading }: { loading: boolean }) => {
     if (searchParams.get(Params.PageSize) && searchParams.get(Params.PageSize) !== pageSizeInput) {
       setPageSizeInput(searchParams.get(Params.PageSize) as string);
     }
-    // this useEffect should only be invoked on searchParams change and not for paginationPage change, because the params change is debounced (to avoid unnecessary requests)
+    // this useEffect should only be invoked on searchParams change and not for paginationPage or pageSizeInput change, because the params change is debounced (to avoid unnecessary requests)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
