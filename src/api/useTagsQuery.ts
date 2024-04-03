@@ -29,6 +29,12 @@ const useTagsQuery = () => {
     queryFn: async () => {
       const res = await fetch(queryURL);
 
+      if (res.status >= 400) {
+        const errorBody = await res.json();
+        console.error(errorBody);
+        throw new Error(errorBody.error_message);
+      }
+
       return await res.json();
     },
   });

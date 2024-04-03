@@ -17,7 +17,7 @@ const TagTable = ({ loading }: { loading: boolean }) => {
     searchParams.get(Params.PageSize) ? (searchParams.get(Params.PageSize) as string) : DefaultParams.PageSize
   );
   const [paginationPage, setPaginationPage] = useState(
-    searchParams.get(Params.Page) ? Number(searchParams.get(Params.Page)) : Number(DefaultParams.Page)
+    Number(searchParams.get(Params.Page)) ? Number(searchParams.get(Params.Page)) : Number(DefaultParams.Page)
   );
 
   const SideEffectPageSizeChange = (pageSize: string, searchParams: URLSearchParams) => {
@@ -49,7 +49,7 @@ const TagTable = ({ loading }: { loading: boolean }) => {
   };
 
   useEffect(() => {
-    if (searchParams.get(Params.Page) && Number(searchParams.get(Params.Page)) !== paginationPage) {
+    if (Number(searchParams.get(Params.Page)) && Number(searchParams.get(Params.Page)) !== paginationPage) {
       setPaginationPage(Number(searchParams.get(Params.Page)));
     }
 
@@ -94,7 +94,14 @@ const TagTable = ({ loading }: { loading: boolean }) => {
           <TagTableBody />
         )}
       </Table>
-      <Pagination sx={{ marginTop: 3 }} count={totalPages} page={paginationPage} handlePageChange={handlePageChange} />
+      {tags.length && (
+        <Pagination
+          sx={{ marginTop: 3 }}
+          count={totalPages}
+          page={paginationPage}
+          handlePageChange={handlePageChange}
+        />
+      )}
     </Box>
   );
 };
