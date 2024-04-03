@@ -1,13 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import useTagsStore from '../store/useTagsStore';
-import { TagsResponseData, DefaultParams } from '../types';
+import { DefaultParams, Params, TagsResponseData } from '../types';
 
-const useTagsQuery = (page?: string | null, pageSize?: string | null, sort?: string | null, order?: string | null) => {
-  page = page ? page : DefaultParams.Page;
-  pageSize = pageSize ? pageSize : DefaultParams.PageSize;
-  sort = sort ? sort : DefaultParams.Sort;
-  order = order ? order : DefaultParams.Order;
+const useTagsQuery = () => {
+  const [searchParams] = useSearchParams();
+  const page = useMemo(() => {
+    return searchParams.get(Params.Page) ? searchParams.get(Params.Page) : DefaultParams.Page;
+  }, [searchParams]);
+  const pageSize = useMemo(() => {
+    return searchParams.get(Params.PageSize) ? searchParams.get(Params.PageSize) : DefaultParams.PageSize;
+  }, [searchParams]);
+  const sort = useMemo(() => {
+    return searchParams.get(Params.Sort) ? searchParams.get(Params.Sort) : DefaultParams.Sort;
+  }, [searchParams]);
+  const order = useMemo(() => {
+    return searchParams.get(Params.Order) ? searchParams.get(Params.Order) : DefaultParams.Order;
+  }, [searchParams]);
 
   const { updateStore } = useTagsStore();
 

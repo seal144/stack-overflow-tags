@@ -4,12 +4,13 @@ import { Box, Table } from '@mui/material';
 import { debounce } from 'lodash';
 import TagTableHead from './TagTableHead';
 import TagTableBody from './TagTableBody';
+import TagTableBodySkeleton from './TagTableBodySkeleton';
 import Pagination from '../Pagination';
 import InputDebounced from '../InputDebounced';
 import useTagsStore from '../../store/useTagsStore';
 import { Params, DefaultParams } from '../../types';
 
-const TagTable = () => {
+const TagTable = ({ loading }: { loading: boolean }) => {
   const { tags, totalPages } = useTagsStore();
   const [searchParams, setSearchParams] = useSearchParams();
   const [pageSizeInput, setPageSizeInput] = useState(
@@ -81,7 +82,17 @@ const TagTable = () => {
       )}
       <Table>
         <TagTableHead />
-        <TagTableBody />
+        {loading ? (
+          <TagTableBodySkeleton
+            rows={
+              Number(searchParams.get(Params.PageSize))
+                ? Number(searchParams.get(Params.PageSize))
+                : Number(DefaultParams.PageSize)
+            }
+          />
+        ) : (
+          <TagTableBody />
+        )}
       </Table>
       <Pagination sx={{ marginTop: 3 }} count={totalPages} page={paginationPage} handlePageChange={handlePageChange} />
     </Box>
