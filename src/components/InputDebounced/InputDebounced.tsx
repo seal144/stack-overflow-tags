@@ -10,7 +10,7 @@ enum Error {
   Max = 'Maximum value: ',
 }
 
-interface InputDebouncedProps {
+export interface InputDebouncedProps {
   label: string;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;

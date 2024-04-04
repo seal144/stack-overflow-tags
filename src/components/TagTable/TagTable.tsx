@@ -91,7 +91,7 @@ const TagTable = ({ loading }: { loading: boolean }) => {
             }
           />
         ) : (
-          <TagTableBody />
+          <TagTableBody tags={tags} />
         )}
       </Table>
       {tags.length && (

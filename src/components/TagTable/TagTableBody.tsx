@@ -1,9 +1,7 @@
 import { TableBody, TableCell, TableRow, Typography } from '@mui/material';
-import useTagsStore from '../../store/useTagsStore';
+import { TagItem } from '../../types';
 
-const TagTableBody = () => {
-  const { tags } = useTagsStore();
-
+const TagTableBody = ({ tags }: { tags: TagItem[] }) => {
   return (
     <TableBody>
       {tags.map((tag) => (

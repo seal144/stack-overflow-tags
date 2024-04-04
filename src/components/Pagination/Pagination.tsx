@@ -6,16 +6,17 @@ interface PaginationParams {
   page: number;
   handlePageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
   sx?: SxProps;
+  siblingCount?: number;
 }
 
-const Pagination = ({ count, page, handlePageChange, sx }: PaginationParams) => {
+const Pagination = ({ count, page, handlePageChange, sx, siblingCount = 0 }: PaginationParams) => {
   return (
     <PaginationMui
       sx={sx}
       count={count}
       page={page}
       onChange={handlePageChange}
-      siblingCount={0}
+      siblingCount={siblingCount}
       showFirstButton
       showLastButton
     />
