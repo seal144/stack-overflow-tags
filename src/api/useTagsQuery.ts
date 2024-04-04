@@ -41,12 +41,8 @@ const useTagsQuery = () => {
 
   useEffect(() => {
     if (data?.items) {
-      //TODO delete later
-      console.log(new Date());
-      console.log(data);
       updateStore(data, Number(page), Number(pageSize));
     }
-    //TODO here is possible bug, check if page and pageSize in deps array not causing strange behavior
   }, [data, updateStore, page, pageSize]);
 
   return { isPending, error };

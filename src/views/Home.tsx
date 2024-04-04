@@ -6,9 +6,13 @@ import ErrorMessage from '../components/ErrorMessage';
 const Home = () => {
   const { isPending, error } = useTagsQuery();
 
+  const errorMessage = error?.message.includes('page above 25 requires access')
+    ? 'Oops, there is an error. It is only possible to browse first 25 pages'
+    : 'Oops, something went wrong!';
+
   return (
     <Box>
-      {error && <ErrorMessage message={'Oops, something went wrong!'} retry />}
+      {error && <ErrorMessage message={errorMessage} retry />}
       {!error && <TagTable loading={isPending} />}
     </Box>
   );

@@ -3,7 +3,6 @@ export interface TagItem {
   count: number;
 }
 
-//TODO there are some other data, make sure that additional data are not needed
 export interface TagsResponseData {
   items: TagItem[];
   total: number;
